@@ -2,12 +2,13 @@ import { test, expect } from '../fixture/metamaskExtension';
 
 
 test('popup page', async ({ page, extensionId }) => {
-    await page.goto(`chrome-extension://${extensionId}/popup.html`);
+    await page.goto(`chrome-extension://${extensionId}/home.html#onboarding/welcome`);
     await expect(page).toHaveTitle(/MetaMask/);
-    
-    let box = page.getByTestId("onboarding-terms-checkbox");
-    await expect(box).toBeVisible({timeout: 10});
-    await box.check();
+    // await expect(page.getByTestId("onboarding-welcome" )).toBeVisible({timeout: 10000});
+    await expect(page.getByRole('heading', { name: "Let's get started" })).toBeVisible({timeout: 10000});
+     
+    await page.getByLabel("onboarding-terms-checkbox").click();
+    // await expect(box).toBeVisible({timeout: 10000});
     console.log("end of test");
 
 
