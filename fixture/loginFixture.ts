@@ -10,7 +10,7 @@ export const test = base.extend<LoginPageFixture>({
   loginPage: async ({ page }, use) => {
     // navigate to login page
     const loginPage = new LoginPage(page);
-    await loginPage.GoTo();
+    await loginPage.LogInWithMetaMask();
     await use(new LoginPage(page));
   },
 

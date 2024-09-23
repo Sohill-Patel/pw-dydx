@@ -1,6 +1,7 @@
 import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import path from 'path';
 
+
 export const test = base.extend<{
   context: BrowserContext;
   extensionId: string;
@@ -10,6 +11,7 @@ export const test = base.extend<{
     const context = await chromium.launchPersistentContext('', {
       headless: false,
       args: [
+        // `--headless=new`,
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
       ],
@@ -34,4 +36,5 @@ export const test = base.extend<{
     await use(extensionId);
   },
 });
+
 export const expect = test.expect;

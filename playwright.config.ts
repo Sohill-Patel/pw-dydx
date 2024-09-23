@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 /**
  * Read environment variables from file.
@@ -11,6 +12,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+export const STORAGE_STATE = path.join(__dirname, '.auth/user.json');
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -30,14 +33,19 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
-    testIdAttribute: "test-id",
+    // testIdAttribute: "test-id",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup metamask',
+      testMatch: /global\.setup\.ts/,
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      // dependencies: ['setup metamask'],
     },
 
     {

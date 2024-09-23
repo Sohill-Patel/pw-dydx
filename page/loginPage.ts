@@ -1,5 +1,6 @@
 import { expect, Page } from "@playwright/test"
 import { HomePage } from "./homePage";
+import { MetaMaskPage } from "./metamaskPage";
 
 export class LoginPage {
     page: Page;
@@ -16,7 +17,9 @@ export class LoginPage {
         await expect(this.page.getByRole('heading', { name: 'Connect your wallet' })).toBeVisible()
     }
 
-    async LogIn(username:string, password:string){
+    async LogInWithMetaMask(){
         // TODO: Login 
+        const mm = new MetaMaskPage(this.page);
+        mm.GoTo();
     }
 }
